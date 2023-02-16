@@ -33,7 +33,10 @@ import org.json.JSONObject
  *@Author Dgryzhkov
  */
 @Composable
-fun MainCard(currentDay: MutableState<WeatherModel>) {
+fun MainCard(
+    currentDay: MutableState<WeatherModel>, onClickSync: () -> Unit,
+    onClickSearch: () -> Unit
+) {
     Column(
         modifier = Modifier
             .padding(5.dp)
@@ -95,13 +98,14 @@ fun MainCard(currentDay: MutableState<WeatherModel>) {
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     IconButton(onClick = {
+                        onClickSearch.invoke()
 
                     }
                     ) {
                         Icon(
                             painter = painterResource(id = R.drawable.ic_baseline_search_24),
                             contentDescription = "im3",
-                            tint = Color.Red
+                            tint = Color.Black
                         )
                     }
                     Text(
@@ -109,17 +113,17 @@ fun MainCard(currentDay: MutableState<WeatherModel>) {
                             currentDay.value.maxTemp.toFloat().toInt()
                         }°C/${currentDay.value.minTemp.toFloat().toInt()}°C",
                         style = TextStyle(fontSize = 16.sp),
-                        color = Color.Red
+                        color = Color.Black
                     )
 
                     IconButton(onClick = {
-
+                        onClickSync.invoke()
                     }
                     ) {
                         Icon(
                             painter = painterResource(id = R.drawable.ic_baseline_cloud_sync_24),
                             contentDescription = "im4",
-                            tint = Color.Red
+                            tint = Color.Black
                         )
                     }
 
